@@ -1,6 +1,6 @@
 ### 词法语法拓展
 #### 1. 简述
-![](image/LexExtend.png)
+![](image/LexExtend.png)  
 Calcite的词法语法解析基于JavaCC实现。将描述SQL的词法和语法文件Parser.jj编译成Java文件  
 
 **parserImpls.ftl**
