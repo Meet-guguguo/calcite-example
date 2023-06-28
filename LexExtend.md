@@ -1,17 +1,17 @@
 ### 词法语法拓展
 #### 1. 简述
-![[image/LexExtend.png]]   
+![](image/LexExtend.png)
 Calcite的词法语法解析基于JavaCC实现。将描述SQL的词法和语法文件Parser.jj编译成Java文件  
 
-*parserImpls.ftl*  
+**parserImpls.ftl**
 附加模板，添加自定义的SQL语法规则  
 路径：src/main/codegen/includes/parserImpls.ftl  
 
-*config.fmpp*  
+**config.fmpp**  
 配置文件，指定需要包含哪些附加模板，添加哪些包，哪些解析方法等等  
 路径：src/main/codegen/config.fmpp  
 
-*Parser.jj*(freemarker 模板文件)  
+**Parser.jj**(freemarker 模板文件)  
 描述SQL的词法和语法文件  
 路径：src/main/codegen/templates/Parser.jj  
 
