@@ -67,7 +67,6 @@ public class flowmain {
 		SqlParser.Config parseConfig;
 		SchemaPlus rootschema = Frameworks.createRootSchema(true);
 		table t = new table(info);
-		schema s = new schema(name,t);
 		rootschema.add(name, t);
 		parseConfig = SqlParser.config().withParserFactory(SqlParserImpl.FACTORY).withLex(Lex.MYSQL)
 				.withCaseSensitive(false);
