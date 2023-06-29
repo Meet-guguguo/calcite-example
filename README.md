@@ -1,6 +1,9 @@
 # calcite-example
 
-LexExtend.md
+calcite使用流程实例见 CalciteTest
+parser-->validator-->logicalplan-->optimize
+
+内容来自LexExtend.md
 ### 一 词法语法拓展
 #### 1. 简述
 ![](image/LexExtend.png)  
