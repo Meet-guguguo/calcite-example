@@ -92,7 +92,7 @@ sp.parseQuery();
 
 #### 语法树中的节点和操作
 SqlNode节点  
-![](image/sqlnode.png)
+![](image/SqlNode.png)
 SQLNode 所有解析树节点的父类  
 * SqlLiteral   
 	常量  
@@ -119,7 +119,7 @@ SQLNode 所有解析树节点的父类
 		 * SqlCreateTable   建表  
 	 * SqlDrop  
 SqlOperator节点  
-![](image/sqloperator.png)
+![](image/SqlOperator.png)
 SqlOperator 所有操作符的父类  
 * SqlSpecialOperator  
 	特殊语法的通用运算符  
