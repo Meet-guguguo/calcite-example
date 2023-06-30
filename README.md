@@ -64,7 +64,7 @@ https://zhuanlan.zhihu.com/p/509681717
 语法解析的主要代码在：src\main\java\org\apache\calcite\sql\parser\SqlParser.java  
 通过以下代码调用：  
 
-1) SqlParser 类的实例化函数  
+1)SqlParser 类的实例化函数  
 ```Java
 public SqlParser create(String s)
 public SqlParser create(String sql, Config config)
@@ -95,7 +95,7 @@ sp.parseQuery();
 #### 2. 语法树中的节点和操作
 SqlNode节点  
 ![](image/SqlNode.png)  
-1) SQLNode 所有解析树节点的父类  
+1)SQLNode 所有解析树节点的父类  
 * SqlLiteral   
 	常量  
 	* SqlNumberLiteral 数字  
@@ -123,7 +123,7 @@ SqlNode节点
 SqlOperator节点  
 ![](image/SqlOperator.png)  
 
-2) SqlOperator 所有操作符的父类  
+2)SqlOperator 所有操作符的父类  
 * SqlSpecialOperator  
 	特殊语法的通用运算符  
 	* SqlAsOperator  
@@ -133,7 +133,6 @@ SqlOperator节点
 	* SqlSetOperator (UNION, INTERSECT, MINUS)  
 * SqlUnresolvedFunction  
 	解析生成，通过validator转为正确的function  
-
 
 
 
