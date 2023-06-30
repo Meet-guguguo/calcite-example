@@ -1,4 +1,4 @@
-package test.java.org.apache.calcite.test;
+package org.apache.calcite.test;
 
 
 import org.apache.calcite.config.Lex;
