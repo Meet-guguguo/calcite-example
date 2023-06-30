@@ -1,28 +1,28 @@
 # calcite-example
 
 # 整体流程
-![](image/calciteflow.png)
+![](image/calciteflow.PNG)
 
 parser-->validator-->logicalplan-->optimize  
 calcite使用流程实例见 CalciteTest 
 
-**主要包含以下几个部分：**
-一 自定义siema和table
-二 词法语法扩展(看需求)
-三 语法解析
-四 验证
-五 生成逻辑执行计划
-六 优化查询
+**主要包含以下几个部分：**  
+一 自定义siema和table  
+二 词法语法扩展(看需求)  
+三 语法解析  
+四 验证  
+五 生成逻辑执行计划  
+六 优化查询  
 
 ### 一 schema 和table
 catalog中包含了schema，用于提供元数据信息，供验证和生成逻辑计划使用
 
-| 结构       | 描述                                                                    |     |
-| ---------- | ----------------------------------------------------------------------- | --- |
-| catalog    | 定义了元数据信息和namespace                                             |     |
-| schema     | 同sql中的数据库,一个schema可以包括多个子schema                                     |     |
-| table      | 同sql中的table                                                          |     |
-| adapters   | 整合不同数据源以实现通用访问<br>由model，schema和schema factory组成 |     |
+| 结构       | 描述                                                                    |
+| ---------- | ----------------------------------------------------------------------- |
+| catalog    | 定义了元数据信息和namespace                                             |
+| schema     | 同sql中的数据库,一个schema可以包括多个子schema                                     |
+| table      | 同sql中的table                                                          |
+| adapters   | 整合不同数据源以实现通用访问<br>由model，schema和schema factory组成 |
 
 
 
@@ -60,11 +60,11 @@ https://zhuanlan.zhihu.com/p/509681717
 
 
 ### 三 语法解析
-#### 语法解析代码
+#### 1. 语法解析代码
 语法解析的主要代码在：src\main\java\org\apache\calcite\sql\parser\SqlParser.java  
 通过以下代码调用：  
 
-SqlParser 类的实例化函数  
+1) SqlParser 类的实例化函数  
 ```Java
 public SqlParser create(String s)
 public SqlParser create(String sql, Config config)
@@ -72,14 +72,16 @@ public SqlParser create(Reader reader, Config config)
 ```
 以上函数最终调用SqlParser的构造函数进行类的实例化  
 
-SQLParser 类中的词法语法解析函数  
+2)SQLParser 类中的词法语法解析函数  
 ```Java
 public SqlNode parseQuery()
 public SqlNode parseQuery(String sql)
 public SqlNode parseStmt()
 public SqlNode parseStmtList()
 ```
-示例：  
+以上函数进行词法语法解析，最终生成一颗语法树
+
+3)示例：  
 ```Java
 sql = "select * from testA";
 parseConfig = parseConfig = SqlParser.config()
@@ -90,10 +92,10 @@ SqlParser sp = SqlParser.create(sql,parseConfig);
 sp.parseQuery();
 ```
 
-#### 语法树中的节点和操作
+#### 2. 语法树中的节点和操作
 SqlNode节点  
-![](image/SqlNode.png)
-SQLNode 所有解析树节点的父类  
+![](image/SqlNode.png)  
+1) SQLNode 所有解析树节点的父类  
 * SqlLiteral   
 	常量  
 	* SqlNumberLiteral 数字  
@@ -119,8 +121,9 @@ SQLNode 所有解析树节点的父类
 		 * SqlCreateTable   建表  
 	 * SqlDrop  
 SqlOperator节点  
-![](image/SqlOperator.png)
-SqlOperator 所有操作符的父类  
+![](image/SqlOperator.png)  
+
+2) SqlOperator 所有操作符的父类  
 * SqlSpecialOperator  
 	特殊语法的通用运算符  
 	* SqlAsOperator  
