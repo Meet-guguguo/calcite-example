@@ -7,7 +7,7 @@ parser-->validator-->logicalplan-->optimize
 calcite使用流程实例见 CalciteTest 
 
 **主要包含以下几个部分：**  
-一 自定义siema和table  
+一 自定义schema和table  
 二 词法语法扩展(看需求)  
 三 语法解析  
 四 验证  
