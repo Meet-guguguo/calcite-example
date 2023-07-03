@@ -1,7 +1,7 @@
 # calcite-example
 
-# 整体流程
-![](image/calciteflow.PNG)
+### 一 整体流程
+![](image/calciteflow.PNG)  
 
 parser-->validator-->logicalplan-->optimize  
 calcite使用流程实例见 CalciteTest 
@@ -13,9 +13,10 @@ calcite使用流程实例见 CalciteTest
 四 验证  
 五 生成逻辑执行计划  
 六 优化查询  
+七 执行器
 
-### 一 schema 和table
-catalog中包含了schema，用于提供元数据信息，供验证和生成逻辑计划使用
+### 二 schema和table
+#### 1. catalog中包含了schema，用于提供元数据信息，供验证和生成逻辑计划使用
 
 | 结构       | 描述                                                                    |
 | ---------- | ----------------------------------------------------------------------- |
@@ -24,9 +25,9 @@ catalog中包含了schema，用于提供元数据信息，供验证和生成逻�
 | table      | 同sql中的table                                                          |
 | adapters   | 整合不同数据源以实现通用访问<br>由model，schema和schema factory组成 |
 
+#### 2. catalog和rootschema
 
-
-### 二 词法语法拓展
+### 三 词法语法拓展
 #### 1. 简述
 ![](image/LexExtend.png)  
 Calcite的词法语法解析基于JavaCC实现。将描述SQL的词法和语法文件Parser.jj编译成Java文件  
@@ -64,7 +65,7 @@ https://zhuanlan.zhihu.com/p/509681717
 语法解析的主要代码在：src\main\java\org\apache\calcite\sql\parser\SqlParser.java  
 通过以下代码调用：  
 
-1)SqlParser 类的实例化函数  
+##### 1)SqlParser 类的实例化函数  
 ```Java
 public SqlParser create(String s)
 public SqlParser create(String sql, Config config)
@@ -72,7 +73,7 @@ public SqlParser create(Reader reader, Config config)
 ```
 以上函数最终调用SqlParser的构造函数进行类的实例化  
 
-2)SQLParser 类中的词法语法解析函数  
+##### 2)SQLParser 类中的词法语法解析函数  
 ```Java
 public SqlNode parseQuery()
 public SqlNode parseQuery(String sql)
@@ -81,11 +82,11 @@ public SqlNode parseStmtList()
 ```
 以上函数进行词法语法解析，最终生成一颗语法树
 
-3)示例：  
+##### 3)示例：  
 ```Java
 sql = "select * from testA";
 parseConfig = parseConfig = SqlParser.config()
-                              .withParserFactory(MPCSqlParserImpl.FACTORY)
+                              .withParserFactory(SqlParserImpl.FACTORY)
                               .withLex(Lex.MYSQL)
 			      .withCaseSensitive(false);
 SqlParser sp = SqlParser.create(sql,parseConfig);
@@ -93,9 +94,8 @@ sp.parseQuery();
 ```
 
 #### 2. 语法树中的节点和操作
-SqlNode节点  
+##### 1)SQLNode 所有解析树节点的父类  
 ![](image/SqlNode.png)  
-1)SQLNode 所有解析树节点的父类  
 * SqlLiteral   
 	常量  
 	* SqlNumberLiteral 数字  
@@ -120,10 +120,8 @@ SqlNode节点
 	 * SqlCreate  
 		 * SqlCreateTable   建表  
 	 * SqlDrop  
-SqlOperator节点  
+##### 2)SqlOperator 所有操作符的父类  
 ![](image/SqlOperator.png)  
-
-2)SqlOperator 所有操作符的父类  
 * SqlSpecialOperator  
 	特殊语法的通用运算符  
 	* SqlAsOperator  
@@ -133,7 +131,3 @@ SqlOperator节点
 	* SqlSetOperator (UNION, INTERSECT, MINUS)  
 * SqlUnresolvedFunction  
 	解析生成，通过validator转为正确的function  
-
-
-
- 
