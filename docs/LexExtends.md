@@ -1,4 +1,4 @@
-### 词法语法拓展
+### 二 词法语法拓展
 #### 1. 简述
 ![](image/LexExtend.png)  
 Calcite的词法语法解析基于JavaCC实现。将描述SQL的词法和语法文件Parser.jj编译成Java文件  
@@ -24,9 +24,11 @@ config.fmpp中定义了小白花.parser.jj中可变的数据内容，指定需�
 #### 3. 定义类
 新的SQL语法规则匹配后，需要自定义或修改相应的类去承接解析出来的信息，最终形成一颗语法树  
 
-#### 4. 参考资料  
+#### 4.代码示例
+见LexExtendTest
+
+#### 5. 参考资料  
 https://javacc.github.io/javacc/  
 https://fmpp.sourceforge.net/manual.html  
 https://freemarker.apache.org/docs/index.html  
-https://zhuanlan.zhihu.com/p/509681717  
-
+https://zhuanlan.zhihu.com/p/509681717 
